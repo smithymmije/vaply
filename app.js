@@ -22,10 +22,8 @@ app.use(expressLayouts);
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 
-//rota para o aplicativo
-app.get('/', function(req, res){
-    res.render('index');
-});
+//Routes
+app.use('/', require('./server/routes/index'));
 
 //inicia o servidor Express para ouvir as solicitações HTTP em uma porta específica
 app.listen(port, () => {
