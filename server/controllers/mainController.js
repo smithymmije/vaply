@@ -7,7 +7,10 @@ exports.homepage = async (req, res) => {
         title: "Notas",
         description: "Aplicativo de Notas.",
     }
-    res.render('index', locals);
+    res.render('index', {
+        locals,
+        layout:'../views/layouts/front-page'
+    });
 }
 
 /**
