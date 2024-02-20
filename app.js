@@ -24,6 +24,13 @@ app.set('view engine', 'ejs');
 
 //Routes
 app.use('/', require('./server/routes/index'));
+app.use('/', require('./server/routes/dashboard'));
+
+//Handle 404
+app.get('*', function(req, res) {
+    //res.status(404).send('404 Pagina Não Encontrada.')//mensagem sem personalização
+    res.status(404).render('404');
+})
 
 //inicia o servidor Express para ouvir as solicitações HTTP em uma porta específica
 app.listen(port, () => {
