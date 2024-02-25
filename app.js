@@ -25,6 +25,8 @@ app.use(session({
         mongoUrl: process.env.MONGODB_URI
     }),
     //cookie: { maxAge: new Date (Date.now() + (3600000))}
+    //cookie: { maxAge: 5000 } // 5000 milissegundos = 5 segundos
+
 }));
 
 app.use(passport.initialize());
