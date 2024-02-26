@@ -9,4 +9,5 @@ const dashboardController = require('../controllers/dashboardController');
 router.get('/dashboard', isLoggedIn, dashboardController.dashboard);
 
 
+
 module.exports = router;
