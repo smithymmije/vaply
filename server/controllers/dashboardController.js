@@ -8,7 +8,7 @@ const { insertMany } = require('../models/User');
  */
 exports.dashboard = async (req, res) => {
 
-  let perPage = 12;
+  let perPage = 10;
   let page = req.query.page || 1;
 
   const locals = {
