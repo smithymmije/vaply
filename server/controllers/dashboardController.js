@@ -112,21 +112,18 @@ exports.dashboardAddNote = async(req, res) => {
 
 
 /**
- * GET /
+ * POST /
  * Add Notes
  */
-exports.dashboardAddNoteSubmit = async(req,res) => {
+exports.dashboardAddNoteSubmit = async (req, res) => {
   try {
-    res.render('dashboard/search',{
-      searchResults: '',
-      layout: '../views/layouts/dashboard'
-    })
+    req.body.user = req.user.id;
+    await Note.create(req.body);
+    res.redirect("/dashboard");
   } catch (error) {
     console.log(error);
   }
-
-}
-
+};
 
 /**
  * GET /
@@ -134,11 +131,11 @@ exports.dashboardAddNoteSubmit = async(req,res) => {
  */
 exports.dashboardSearch = async(req,res) => {
   try {
-    req.body.user = req.user.id;
-    await Note.create(req.body)
-    res.redirect('/dashboard');
+    res.render("dashboard/search", {
+      searchResults: "",
+      layout: "../views/layouts/dashboard",
+    });
   } catch (error) {}
-
 };
 
 /**
