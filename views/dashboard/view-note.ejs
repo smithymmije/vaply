@@ -3,13 +3,13 @@
         <div class="col">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/dashboard">Painel</a></li>
                     <li class="breadcrumb-item active"><%= note.title  %></li>
                 </ol>
             </nav>
             <div class="col d-flex justify-content-between align-items-center">
-                <h1 class="h3">View Note</h1>
-                <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">Delete</button>
+                <h1 class="h3">Ver nota</h1>
+                <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">Deletar</button>
             </div>
         </div>
     </div>
@@ -22,14 +22,10 @@
       </div>
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-lg"> Update</button>
+        <button type="submit" class="btn btn-primary btn-lg"> Atualizar</button>
       </div>
 
     </form>
-
-
-
-
 </div>
 
 
@@ -37,24 +33,24 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">You are about to delete a note</h5>
+          <h5 class="modal-title">Você está prestes a excluir uma nota</h5>
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <p>
-            This will delete your note <b class="fw-bold"><%= note.title  %></b><br/>
-            Are you sure?
+            Isso excluirá sua nota <b class="fw-bold"><%= note.title  %></b><br/>
+            Tem certeza?
 
           </p>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
 
             <form action="/dashboard/item-delete/<%=noteID %>?_method=DELETE" method="POST" class="position-relative">
-            <button type="submit" class="btn btn-primary">Delete Note</button>
+            <button type="submit" class="btn btn-primary">Deletar Nota</button>
           </form>
           
         </div>

@@ -3,13 +3,18 @@
       <a href="/dashboard" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-primary text-decoration-none fw-bold fs-2">
         Notas
       </a>
+
+      <div class="col-md text-end min-mobile-logof position-fixed top-0 end-0 mt-2 me-2">
+        <a href="/logout" type="button" class="btn btn-outline-primary">Sair</a>
+      </div>
+
         <form class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0" 
         role="search" method="POST" action="/dashboard/search">
             <input type="search" name="searchTerm" class="form-control border-primary"
-            placeholder="Search..." aria-label="Search">
+            placeholder="Procurar..." aria-label="Search">
         </form>
-      <div class="col-md-3 text-end">
-        <a href="/logout" type="button" class="btn btn-outline-primary">Logout</a>
+      <div class="col-md-3 text-end max-mobile-logof">
+        <a href="/logout" type="button" class="btn btn-outline-primary">Sair</a>
       </div>
     </header>
   </div>

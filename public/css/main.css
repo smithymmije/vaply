@@ -93,3 +93,31 @@ h1,h2,h3,h4,h5,h6 {
     right: -50px;
     bottom: -30px;
   }
+
+  @media screen and (max-width: 767px) {
+    /* Estilos para dispositivos móveis */
+    .home-title::after {
+        transform: scale(0.6); /* Redimensionando a imagem para 50% do tamanho original */
+    }
+}
+
+  @media screen and (max-width: 767px) {
+    /* Estilos para dispositivos móveis */
+    .home-title::before {
+        transform: scale(0.6); /* Redimensionando a imagem para 50% do tamanho original */
+    }
+}
+
+  @media screen and (min-width: 767px) {
+    /* Estilos para dispositivos móveis */
+    .min-mobile-logof {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* Estilos para dispositivos móveis */
+    .max-mobile-logof {
+        display: none;
+    }
+}
