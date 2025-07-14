@@ -1,28 +1,65 @@
-<div class="container-fluid container-fluid-custom pb-5 mb-5">
-    <div class="row mb-4">
-        <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/dashboard">Painel</a></li>
-                    <li class="breadcrumb-item active">Add Nota</li>
-                </ol>
-            </nav>
-            <div class="col d-flex justify-content-between align-items-center">
-                <h1 class="h3">Add Nota</h1>
-            </div>
-        </div>
+<div class="add-note-wrapper">
+  <nav class="breadcrumb-nav">
+    <ul class="breadcrumb-list">
+      <li><a href="/dashboard">Painel</a></li>
+      <li>Criar Vaga</li>
+    </ul>
+  </nav>
+
+  <div class="note-header">
+    <h1>Publicar Nova Vaga</h1>
+  </div>
+
+  <form action="/dashboard/add-job" method="POST" class="job-form">
+    <div class="form-group">
+      <label for="jobTitle">Título da Vaga</label>
+      <input type="text" id="jobTitle" name="jobTitle" class="form-input" placeholder="Ex: Desenvolvedor Front-end Sênior" required>
     </div>
-    <form action="/dashboard/add" method="POST" class="position-relative">
-      <div class="form-group mb-4 position-absolute" style="left:1px; top:1px; right: 1px;">
-        <input type="text" class="form-control fw-bold border-0 fs-4" id="title" name="title" placeholder="Titulo" required>
-      </div>
-      <div class="form-group mb-4">
-        <textarea required class="form-control pt-5 fs-4" id="body" name="body" placeholder="Conteúdo da nota..." rows="12"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-lg">+ Add Nota</button>
-      </div>
-    </form>
+
+    <div class="form-group">
+      <label for="companyName">Empresa</label>
+      <input type="text" id="companyName" name="companyName" class="form-input" placeholder="Ex: Tech Solutions Ltda." required>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Localização</label>
+      <input type="text" id="location" name="location" class="form-input" placeholder="Ex: São Paulo, SP ou Remoto" required>
+    </div>
+
+    <div class="form-group">
+      <label for="jobType">Tipo de Vaga</label>
+      <select id="jobType" name="jobType" class="form-input" required>
+        <option value="">Selecione o tipo de vaga</option>
+        <option value="full-time">Tempo Integral</option>
+        <option value="part-time">Meio Período</option>
+        <option value="internship">Estágio</option>
+        <option value="freelance">Freelancer</option>
+        <option value="contract">Contrato</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="experienceLevel">Nível de Experiência</label>
+      <select id="experienceLevel" name="experienceLevel" class="form-input">
+        <option value="">Selecione o nível</option>
+        <option value="intern">Estagiário</option>
+        <option value="junior">Júnior</option>
+        <option value="mid">Pleno</option>
+        <option value="senior">Sênior</option>
+        <option value="lead">Líder</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Salário (Opcional)</label>
+      <input type="text" id="salary" name="salary" class="form-input" placeholder="Ex: R$ 3.000 - R$ 5.000 ou A combinar">
+    </div>
+
+    <div class="form-group">
+      <label for="jobDescription">Descrição da Vaga</label>
+      <textarea id="jobDescription" name="jobDescription" class="form-input textarea-height" placeholder="Descreva os requisitos, responsabilidades e benefícios..." rows="12" required></textarea>
+    </div>
+
+    <button type="submit" class="btn-primary-form">Publicar Vaga</button>
+  </form>
 </div>
-
-

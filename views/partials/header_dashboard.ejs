@@ -1,20 +1,14 @@
-<div class="container-fluid">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
-      <a href="/dashboard" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-primary text-decoration-none fw-bold fs-2">
-        Notas
-      </a>
+<div class="container">
+  <header class="custom-header">
+    <a href="/" class="site-logo">Vagora</a>
 
-      <div class="col-md text-end min-mobile-logof position-fixed top-0 end-0 mt-2 me-2 style="z-index: 2;">
-        <a href="/logout" type="button" class="btn btn-outline-primary">Sair</a>
-      </div>
+    <form class="search-form" method="POST" action="/dashboard/search">
+      <input type="search" name="searchTerm" placeholder="Procurar minhas vagas publicadas" aria-label="Search"
+        value="<%= typeof searchTerm !== 'undefined' ? searchTerm : '' %>">
+    </form>
 
-        <form class="nav col-12 col-md-auto flex-fill mb-2 justify-content-center mb-md-0" 
-        role="search" method="POST" action="/dashboard/search">
-            <input type="search" name="searchTerm" class="form-control border-primary"
-            placeholder="Procurar..." aria-label="Search">
-        </form>
-      <div class="col-md-3 text-end max-mobile-logof">
-        <a href="/logout" type="button" class="btn btn-outline-primary">Sair</a>
-      </div>
-    </header>
-  </div>
+    <div class="logout-group">
+      <a href="/logout" class="btn-logout">Sair</a>
+    </div>
+  </header>
+</div>

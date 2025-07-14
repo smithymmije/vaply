@@ -1,71 +1,40 @@
-<div class="container-fluid container-fluid-custom pb-5 mb-5">
-    <div class="row mb-4">
-        <div class="col">
-            <h1>Olá, <%= userName %></h1>
+
+
+<div class="dashboard-wrapper">
+  <header class="dashboard-header">
+    <h1>Olá, <%= userName %></h1>
+    <a href="/dashboard/add-job" class="btn-add">+ Criar Vaga</a>
+  </header>
+
+  <h2 class="section-title">💼 Minhas Vagas Publicadas</h2>
+
+  <section class="notes-grid">
+    <% if (vagas && vagas.length > 0) { %>
+      <% vagas.forEach(vaga => { %>
+        <div class="note-card">
+          <h5><%= vaga.jobTitle %></h5>
+          <p><strong>Empresa:</strong> <%= vaga.companyName %></p>
+          <p><strong>Local:</strong> <%= vaga.location %></p>
+          <p><strong>Tipo:</strong> <%= vaga.jobType %></p>
+          <p><strong>Nível:</strong> <%= vaga.experienceLevel %></p>
+          <% if (vaga.salary && vaga.salary.length > 0) { %>
+            <p><strong>Salário:</strong> <%= vaga.salary %></p>
+          <% } %>
+          <p class="description"><%= vaga.jobDescription %></p>
+          <p class="card-meta">🕒 Criada em <%= new Date(vaga.createdAt).toLocaleDateString() %></p>
+
+          <div class="action-buttons">
+            <a href="/dashboard/job/<%= vaga._id %>" class="btn">👁️ Ver</a>
+            <a href="/dashboard/job-delete/<%= vaga._id %>" class="btn danger">🗑️ Excluir</a>
+          </div>
         </div>
-        <div class="col text-end">
-            <a href="/dashboard/add" class="btn btn-primary">+ Add Nota</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <% if(notes.length > 0) { for(var i=0; i < notes.length; i++) { %> 
-
-            <div class="col-sm-3 mb-4">
-                <div class="card border-primary" style="min-height: 210px">
-                    <a href="/dashboard/item/<%= notes[i]._id %>" class="card-body text-decoration-none">
-                        <h5 class="card-title"><%= notes[i].title  %></h5>
-                        <p class="card-text"><%= notes[i].body  %></p>
-                    </a>
-                </div>
-            </div>
-        <% }} else { %>
-            <div class="row">
-                <div class="col-3">
-                    <img src="/img/human-3.svg" alt="Human pointing hand toward a create button">
-                </div>
-                <div class="col mt-md-4">
-                    <h2>Okay...</h2>
-                    <h4>Vamos começar com sua primeira nota!<br/><br/>
-                        <a href="/dashboard/add"> Criar agora!</a>
-                    </h4>
-                </div>
-            </div>
-        <% } %>
-    </div>
-
-   
-
-      <% if (notes.length > 0) { %>
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center mt-5">
-              
-                <% if (current == 1) { %>
-                    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
-                    <% } else { %>
-                    <li class="page-item"><a class="page-link" href="/dashboard">Primeiro</a></li>
-                <% } %>
-                <% var i = (Number(current) > 5 ? Number(current) -4 : 1) %>
-                <% if (i !== 1) { %>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <% } %>
-                <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                <% if (i == current) { %>
-                    <li class="page-item"><a class="page-link" href="#"><%= i %></a></li>
-                <% } else { %>
-                    <li class="page-item"><a class="page-link" href="/dashboard/?page=<%= i %>"><%= i %></a></li>
-                <% } %>
-                <% if (i == Number(current) + 4 && i < pages) { %>
-                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <% } %>
-                <% } %>
-                <% if (current == pages) { %>
-                    <li class="page-item disabled"><a class="page-link" href="#">Última</a></li>
-                <% } else{ %>
-                    <li class="page-item"><a class="page-link" href="/dashboard/?page=<%= pages %>">Próximo</a></li>
-                <% } %>    
-            </ul>
-          </nav>
-      <% } %>
+      <% }) %>
+    <% } else { %>
+      <div class="empty-state">
+        <h2>Você ainda não publicou nenhuma vaga.</h2>
+        <p>Crie sua primeira oportunidade para candidatos encontrarem!</p>
+        <a href="/dashboard/add-job" class="btn-start">Criar Vaga</a>
+      </div>
+    <% } %>
+  </section>
 </div>

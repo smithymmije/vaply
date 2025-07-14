@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
 const NoteSchema = new Schema({
   user: {
     type: Schema.ObjectId,
@@ -14,15 +14,10 @@ const NoteSchema = new Schema({
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now()
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now()
+  isPublic: {
+    type: Boolean,
+    default: true
   }
-});
+}, { timestamps: true }); // ✅ Isso ativa createdAt e updatedAt automáticos
 
 module.exports = mongoose.model('Note', NoteSchema);
-

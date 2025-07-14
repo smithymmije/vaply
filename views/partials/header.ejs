@@ -1,19 +1,92 @@
-<div class="container-fluid">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-primary text-decoration-none fw-bold fs-2">
-        Notas
-      </a>
+<div class="container">
+  <header class="header">
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-        <li><a href="/about" class="nav-link px-2 link-dark">About</a></li>
-      </ul>
+    <a href="/" class="logo">Vagora</a>
 
-      <div class="col-md-3 text-end">
-        <a href="/auth/google" type="button" class="btn btn-outline-primary me-2">Criar Conta</a>
-        <a href="/auth/google" type="button" class="btn btn-primary">Entrar</a>
+    
+    <!-- Formulário de busca (desktop) -->
+    <form class="search-form" method="GET" action="/">
+      <input type="search" name="search" placeholder="Procurar vaga..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+    </form>
+
+    <% if (!userName) { %>
+      <div class="auth-buttons">
+        <a href="/auth/google" class="btn outline">Criar Conta</a>
+        <a href="/auth/google" class="btn solid">Entrar</a>
       </div>
-    </header>
-  </div>
+    <% } else { %>
+      <div class="auth-buttons">
+        <span class="user-name"><!--<%= userName %>--></span>
+        <a href="/dashboard" class="btn outline">Painel</a>
+        <a href="/logout" class="btn outline">Sair</a>
+      </div>
+    <% } %>
+
+    <% if (userName) { %>
+      <div class="user-menu">
+        <% if (userPhoto) { %>
+          <img src="<%= userPhoto %>" alt="Avatar de <%= userName %>" class="avatar" />
+        <% } %>
+      </div>
+    <% } %>
+
+    <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu de navegação">
+      <span class="hamburger-icon"></span>
+      <span class="hamburger-icon"></span>
+      <span class="hamburger-icon"></span>
+  </button>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menu principal do celular" aria-hidden="true">
+    <% if (!userName) { %>
+    <a href="/auth/google">Criar Conta</a>
+    <a href="/auth/google">Entrar</a>
+    <% } else { %>
+    <a href="/dashboard">Painel</a>
+    <a href="/logout">Sair</a>
+    <% } %>
+    <form class="mobile-search" method="GET" action="/">
+        <input type="search" name="search" placeholder="Procurar vaga..." value="<%= typeof search !== 'undefined' ? search : '' %>">
+    </form>
+</nav>
+  </header>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const body = document.body;
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay);
+
+    function toggleMenu() {
+        const isMenuOpen = mobileMenu.classList.toggle('is-open');
+        hamburgerBtn.classList.toggle('is-active', isMenuOpen);
+        mobileMenu.setAttribute('aria-hidden', !isMenuOpen);
+        hamburgerBtn.setAttribute('aria-expanded', isMenuOpen);
+
+        overlay.classList.toggle('is-active', isMenuOpen);
+        if (isMenuOpen) {
+            body.style.overflowY = 'hidden';
+        } else {
+            body.style.overflowY = '';
+        }
+    }
+
+    hamburgerBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('is-open')) {
+                toggleMenu();
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+            toggleMenu();
+        }
+    });
+});
+</script>
