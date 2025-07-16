@@ -1,40 +1,61 @@
-
-
 <div class="dashboard-wrapper">
   <header class="dashboard-header">
     <h1>Olá, <%= userName %></h1>
     <a href="/dashboard/add-job" class="btn-add">+ Criar Vaga</a>
   </header>
 
-  <h2 class="section-title">💼 Minhas Vagas Publicadas</h2>
-
+  <!-- LISTA DE VAGAS -->
   <section class="notes-grid">
-    <% if (vagas && vagas.length > 0) { %>
-      <% vagas.forEach(vaga => { %>
-        <div class="note-card">
-          <h5><%= vaga.jobTitle %></h5>
-          <p><strong>Empresa:</strong> <%= vaga.companyName %></p>
-          <p><strong>Local:</strong> <%= vaga.location %></p>
-          <p><strong>Tipo:</strong> <%= vaga.jobType %></p>
-          <p><strong>Nível:</strong> <%= vaga.experienceLevel %></p>
-          <% if (vaga.salary && vaga.salary.length > 0) { %>
-            <p><strong>Salário:</strong> <%= vaga.salary %></p>
-          <% } %>
-          <p class="description"><%= vaga.jobDescription %></p>
-          <p class="card-meta">🕒 Criada em <%= new Date(vaga.createdAt).toLocaleDateString() %></p>
-
-          <div class="action-buttons">
-            <a href="/dashboard/job/<%= vaga._id %>" class="btn">👁️ Ver</a>
-            <a href="/dashboard/job-delete/<%= vaga._id %>" class="btn danger">🗑️ Excluir</a>
+    <% if (jobs && jobs.length > 0) { %>
+      <% for (let i = 0; i < jobs.length; i++) { %>
+        <a href="/dashboard/job/<%= jobs[i]._id %>" class="note-link">
+          <div class="note-card">
+            <h5><%= jobs[i].jobTitle %></h5>
+            <p><%= jobs[i].companyName %> – <%= jobs[i].location %></p>
+            <p class="card-meta">🕒 Publicado por você</p>
           </div>
-        </div>
-      <% }) %>
+        </a>
+      <% } %>
     <% } else { %>
       <div class="empty-state">
-        <h2>Você ainda não publicou nenhuma vaga.</h2>
-        <p>Crie sua primeira oportunidade para candidatos encontrarem!</p>
-        <a href="/dashboard/add-job" class="btn-start">Criar Vaga</a>
+        <h2>Okay...</h2>
+        <h4>Vamos começar com sua primeira vaga!</h4>
+        <a href="/dashboard/add-job" class="btn-start">Criar agora!</a>
       </div>
     <% } %>
   </section>
+
+  <!-- PAGINAÇÃO (baseada no array jobs) -->
+  <% if (jobs && jobs.length > 0) { %>
+    <nav class="pagination-nav">
+      <ul class="pagination-list">
+        <% if (current == 1) { %>
+          <li><span class="disabled">Anterior</span></li>
+        <% } else { %>
+          <li><a href="/dashboard">Primeiro</a></li>
+        <% } %>
+
+        <% let i = (Number(current) > 5 ? Number(current) - 4 : 1); %>
+        <% if (i !== 1) { %>
+          <li><span>...</span></li>
+        <% } %>
+
+        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+          <% if (i == current) { %>
+            <li><span class="active"><%= i %></span></li>
+          <% } else { %>
+            <li><a href="/dashboard/?page=<%= i %>"><%= i %></a></li>
+          <% } %>
+        <% if (i == Number(current) + 4 && i < pages) { %>
+          <li><span>...</span></li>
+        <% } } %>
+
+        <% if (current == pages) { %>
+          <li><span class="disabled">Última</span></li>
+        <% } else { %>
+          <li><a href="/dashboard/?page=<%= pages %>">Próximo</a></li>
+        <% } %>
+      </ul>
+    </nav>
+  <% } %>
 </div>

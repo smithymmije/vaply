@@ -1,8 +1,9 @@
+<!-- views/dashboard/add.ejs  (agora é formulário de VAGA) -->
 <div class="add-note-wrapper">
   <nav class="breadcrumb-nav">
     <ul class="breadcrumb-list">
       <li><a href="/dashboard">Painel</a></li>
-      <li>Criar Vaga</li>
+      <li>Publicar Vaga</li>
     </ul>
   </nav>
 
@@ -10,6 +11,7 @@
     <h1>Publicar Nova Vaga</h1>
   </div>
 
+  <!-- action aponta para a rota de vagas -->
   <form action="/dashboard/add-job" method="POST" class="job-form">
     <div class="form-group">
       <label for="jobTitle">Título da Vaga</label>

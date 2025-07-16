@@ -1,14 +1,26 @@
 <div class="search-wrapper">
-    <% if (searchResults != '') { %>
-      <% searchResults.forEach(function (note, index) { %>
-        <div class="search-item">
-          <a href="/dashboard/item/<%= note._id %>">
-            <h4><%= note.title %></h4>
-          </a>
-        </div>
-      <% }) %>
-    <% } else { %>
-      <p class="no-results">Não foram encontrados itens.</p>
-    <% } %>
-  </div>
-  
+  <!-- NOTAS -->
+  <% if (notes && notes.length) { %>
+    <h3>Notas</h3>
+    <% notes.forEach(n => { %>
+      <div class="search-item">
+        <a href="/dashboard/item/<%= n._id %>"><h4><%= n.title %></h4></a>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <!-- VAGAS -->
+  <% if (jobs && jobs.length) { %>
+    <h3>Vagas</h3>
+    <% jobs.forEach(j => { %>
+      <div class="search-item">
+        <a href="/dashboard/job/<%= j._id %>"><h4><%= j.jobTitle %> – <%= j.companyName %></h4></a>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <!-- Sem resultados -->
+  <% if ((!notes || !notes.length) && (!jobs || !jobs.length)) { %>
+    <p class="no-results">Não foram encontrados itens.</p>
+  <% } %>
+</div>

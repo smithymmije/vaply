@@ -1,12 +1,11 @@
-let pagina = 2;
+let pagina = 2;  // inicia da segunda página, assumindo que a 1 já veio no HTML
 let carregando = false;
 let chegouAoFim = false;
 
-// Detecta o scroll e dispara carregamento
 function scrollHandler() {
   if (carregando || chegouAoFim) return;
 
-  const scrollTop = window.scrollY;
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const windowHeight = window.innerHeight;
   const bodyHeight = document.body.offsetHeight;
 
@@ -17,14 +16,15 @@ function scrollHandler() {
 
 window.addEventListener('scroll', scrollHandler);
 
-// Busca e insere notas dinamicamente
 function carregarMaisNotas() {
+  console.log('Carregando página:', pagina);
   carregando = true;
   document.getElementById('loading').style.display = 'block';
 
   fetch(`/notas/load?page=${pagina}`)
     .then(res => res.json())
     .then(notas => {
+      console.log('Notas recebidas:', notas.length);
       const container = document.getElementById('notas-container');
 
       if (notas.length === 0) {
@@ -67,4 +67,3 @@ function carregarMaisNotas() {
       document.getElementById('loading').style.display = 'none';
     });
 }
-

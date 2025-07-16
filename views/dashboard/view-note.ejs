@@ -1,55 +1,100 @@
-<div class="main-wrapper">
+<!-- views/dashboard/view-job.ejs  (mesmo CSS de add.ejs) -->
+<div class="add-note-wrapper">
   <nav class="breadcrumb-nav">
     <ul class="breadcrumb-list">
       <li><a href="/dashboard">Painel</a></li>
-      <li><%= note.title %></li>
+      <li><%= job.title %></li>
+
     </ul>
   </nav>
 
   <div class="note-header">
-    <h1 class="title-view">Ver nota</h1>
+    <h1 class="title-view">Ver Vaga</h1>
     <button type="button" class="btn-danger" id="deleteButton">Excluir</button>
   </div>
 
-  <form action="/dashboard/item/<%= noteID %>?_method=PUT" method="POST" class="note-form">
-    <input type="text" id="title" name="title" class="note-title" value="<%= note.title %>" placeholder="Título">
+  <!-- Formulário estilizado igual ao add.ejs -->
+  <form action="/dashboard/job/<%= job._id %>?_method=PUT" method="POST" class="note-form">
+    <div class="form-group">
+      <label for="jobTitle">Título da Vaga</label>
+      <input type="text" id="jobTitle" name="jobTitle" class="note-title" value="<%= job.jobTitle %>" required>
+    </div>
 
-    <textarea id="body" name="body" class="note-body" placeholder="Escreva sua nota..." rows="12"><%= note.body %></textarea>
+    <div class="form-group">
+      <label for="companyName">Empresa</label>
+      <input type="text" id="companyName" name="companyName" class="note-title" value="<%= job.companyName %>" required>
+    </div>
 
-    <button type="submit" class="btn-primary">Atualizar</button>
+    <div class="form-group">
+      <label for="location">Localização</label>
+      <input type="text" id="location" name="location" class="note-title" value="<%= job.location %>" required>
+    </div>
+
+    <div class="form-group">
+      <label for="jobType">Tipo de Vaga</label>
+      <select id="jobType" name="jobType" class="note-title" required>
+        <option value="full-time" <%= job.jobType === 'full-time' ? 'selected' : '' %>>Tempo Integral</option>
+        <option value="part-time" <%= job.jobType === 'part-time' ? 'selected' : '' %>>Meio Período</option>
+        <option value="internship" <%= job.jobType === 'internship' ? 'selected' : '' %>>Estágio</option>
+        <option value="freelance" <%= job.jobType === 'freelance' ? 'selected' : '' %>>Freelancer</option>
+        <option value="contract" <%= job.jobType === 'contract' ? 'selected' : '' %>>Contrato</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="experienceLevel">Nível de Experiência</label>
+      <select id="experienceLevel" name="experienceLevel" class="note-title">
+        <option value="">Selecione</option>
+        <option value="intern"   <%= job.experienceLevel === 'intern'   ? 'selected' : '' %>>Estagiário</option>
+        <option value="junior"   <%= job.experienceLevel === 'junior'   ? 'selected' : '' %>>Júnior</option>
+        <option value="mid"      <%= job.experienceLevel === 'mid'      ? 'selected' : '' %>>Pleno</option>
+        <option value="senior"   <%= job.experienceLevel === 'senior'   ? 'selected' : '' %>>Sênior</option>
+        <option value="lead"     <%= job.experienceLevel === 'lead'     ? 'selected' : '' %>>Líder</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="salary">Salário (Opcional)</label>
+      <input type="text" id="salary" name="salary" class="note-title" value="<%= job.salary %>">
+    </div>
+
+    <div class="form-group">
+      <label for="jobDescription">Descrição</label>
+      <textarea id="jobDescription" name="jobDescription" class="note-body" rows="12" required><%= job.jobDescription %></textarea>
+    </div>
+
+    <button type="submit" class="btn-primary">Atualizar Vaga</button>
   </form>
-</div>
 
-<!-- Modal para deletar -->
-<div class="modal" id="deleteModal" style="display: none;">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h2>Você está prestes a excluir uma nota</h2>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-    </div>
-    <div class="modal-body">
-      <p>
-        Isso excluirá sua nota <strong><%= note.title %></strong><br>
-        Tem certeza?
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
-      <form action="/dashboard/item-delete/<%=noteID %>?_method=DELETE" method="POST">
-        <button type="submit" class="btn-primary">Deletar Nota</button>
-      </form>
+  <!-- Modal de exclusão (mesmo estilo) -->
+  <div class="modal" id="deleteModal" style="display: none;">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Excluir vaga?</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Isso excluirá permanentemente a vaga <strong><%= job.jobTitle %></strong>. Tem certeza?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+        <form action="/dashboard/job-delete/<%= job._id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit" class="btn-primary">Deletar Vaga</button>
+        </form>
+      </div>
     </div>
   </div>
+
+  <script>
+    const deleteButton = document.getElementById('deleteButton');
+    const deleteModal  = document.getElementById('deleteModal');
+
+    deleteButton.addEventListener('click', () => {
+      deleteModal.style.display = 'flex';
+    });
+
+    function closeModal() {
+      deleteModal.style.display = 'none';
+    }
+  </script>
 </div>
-<script>
-  const deleteButton = document.getElementById('deleteButton');
-  const deleteModal = document.getElementById('deleteModal');
-
-  deleteButton.addEventListener('click', () => {
-    deleteModal.style.display = 'flex';
-  });
-
-  function closeModal() {
-    deleteModal.style.display = 'none';
-  }
-</script>
