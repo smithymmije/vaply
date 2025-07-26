@@ -48,7 +48,7 @@ const tempoDecorrido = (dateString) => {
  */
 exports.homepage = async (req, res) => {
     const locals = {
-        title: "Vagora",
+        title: "vaply",
         description: "Aplicativo de Vagas.",
     };
 
@@ -139,7 +139,7 @@ exports.carregarMaisVagas = async (req, res) => {
  */
 exports.about = async (req, res) => {
     const locals = {
-        title: "Sobre - Vagora",
+        title: "Sobre - vaply",
         description: "Aplicativo de Vagas.",
     };
 
