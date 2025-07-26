@@ -21,24 +21,38 @@
 
     <!-- Cards de vagas -->
     <section id="vagas-container" class="card-grid">
-      <% if (typeof vagas !== 'undefined' && vagas.length > 0) { vagas.forEach(vaga => { %>
-        <div class="card-column">
-          <div class="custom-card">
-            <div class="card-content">
-              <h5><%= vaga.jobTitle %></h5>
-              <p><strong>Empresa:</strong> <%= vaga.companyName %></p>
-              <p><strong>Local:</strong> <%= vaga.location %></p>
-              <p><strong>Tipo:</strong> <%= vaga.jobType %></p>
-              <p><strong>Experiência:</strong> <%= vaga.experienceLevel %></p>
-              <% if (vaga.salary && vaga.salary.length > 0) { %>
-                <p><strong>Salário:</strong> <%= vaga.salary %></p>
-              <% } %>
-              <p class="description"><%= vaga.jobDescription %></p>
-              <p class="meta">🕒 Publicado a <%= tempoDecorrido(vaga.createdAt) %></p>
+      <% if (typeof vagas !== 'undefined' && vagas.length > 0) { %>
+        <% vagas.forEach(vaga => { %>
+          <div class="card-column">
+            <div class="custom-card">
+              <div class="card-content">
+                <h5><%= vaga.jobTitle %></h5>
+                <p><strong>Empresa:</strong> <%= vaga.companyName %></p>
+                <p><strong>Local:</strong> <%= vaga.location %></p>
+                <p><strong>Tipo:</strong> <%= vaga.jobType %></p>
+                <p><strong>Experiência:</strong> <%= vaga.experienceLevel %></p>
+                
+                <% if (vaga.salary && vaga.salary.length > 0) { %>
+                  <p><strong>Salário:</strong> <%= vaga.salary %></p>
+                <% } %>
+
+                <p class="description"><%= vaga.jobDescription %></p>
+
+                <div class="user-info">
+                  <img 
+                    src="<%= vaga.user?.profileImage || '/images/default-user.png' %>" 
+                    alt="Foto de <%= vaga.user?.firstName || 'Usuário' %>" 
+                    class="user-photo"
+                  >
+                  <span>✍️ Postado por <%= vaga.user?.firstName || 'Anônimo' %></span>
+                </div>
+
+                <p class="meta">🕒 Publicado a <%= tempoDecorrido(vaga.createdAt) %></p>
+              </div>
             </div>
           </div>
-        </div>
-      <% }) } else { %>
+        <% }) %>
+      <% } else { %>
         <div class="no-vagas">
           <h4>Nenhuma vaga disponível ainda.</h4>
           <p>Assim que algum usuário publicar uma oportunidade, aparecerá aqui!</p>

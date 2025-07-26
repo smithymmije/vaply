@@ -20,7 +20,8 @@ const UserSchema = new Schema({
     },
     profileImage: {
         type: String,
-        required: true
+        //required: true
+        default: '/images/default-user.png' // <-- CORREÇÃO AQUI!
     },
     createdAt: {
         type: Date,

@@ -1036,3 +1036,20 @@ html {
     opacity: 1;
     visibility: visible;
 }
+
+/*Fotos do Usuário nos posts*/
+.user-photo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;        /* Deixa a imagem redonda */
+  object-fit: cover;         /* Garante que a imagem se encaixe bem */
+  border: 2px solid #ddd;    /* Borda leve e elegante */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-right: 8px;         /* Espaço entre imagem e texto */
+  vertical-align: middle;    /* Alinha com o texto ao lado */
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
