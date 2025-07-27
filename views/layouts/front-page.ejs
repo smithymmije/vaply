@@ -19,6 +19,76 @@
 
   <!-- CSS personalizado -->
   <link rel="stylesheet" href="/css/main.css" />
+
+  <% if (typeof vaga !== 'undefined') { 
+    let descriptionClean = '';
+    if (vaga.jobDescription) {
+      descriptionClean = vaga.jobDescription
+        .replace(/"/g, '\\"')
+        .replace(/(<([^>]+)>)/gi, '')
+        .replace(/(\r\n|\n|\r)/gm, ' ')
+        .trim();
+    }
+%>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "<%= vaga.jobTitle %>",
+  "description": "<%= descriptionClean %>",
+  "datePosted": "<%= vaga.createdAt.toISOString() %>",
+  "validThrough": "<%= new Date(new Date(vaga.createdAt).getTime() + 30*24*60*60*1000).toISOString() %>",
+  "employmentType": "<%= vaga.jobType || 'FULL_TIME' %>",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "<%= vaga.companyName %>",
+    <% if (vaga.companyUrl) { %>
+    "sameAs": "<%= vaga.companyUrl %>",
+    <% } %>
+    "logo": "<%= vaga.companyLogo || '/images/default-company-logo.png' %>"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "<%= vaga.location || 'Espírito Santo' %>",
+      "addressRegion": "ES",
+      "addressCountry": "BR"
+      <% if (vaga.streetAddress) { %>,
+      "streetAddress": "<%= vaga.streetAddress %>"
+      <% } %>
+    }
+  }
+  <% if (vaga.salaryMin && vaga.salaryMax) { %>,
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "BRL",
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": <%= vaga.salaryMin %>,
+      "maxValue": <%= vaga.salaryMax %>,
+      "unitText": "MONTH"
+    }
+  }
+  <% } %>
+  <% if (vaga.experienceRequirements) { %>,
+  "experienceRequirements": "<%= vaga.experienceRequirements %>"
+  <% } %>
+  <% if (vaga.educationRequirements) { %>,
+  "educationRequirements": "<%= vaga.educationRequirements %>"
+  <% } %>
+  <% if (vaga.jobBenefits) { %>,
+  "jobBenefits": "<%= vaga.jobBenefits %>"
+  <% } %>
+  <% if (vaga.workHours) { %>,
+  "workHours": "<%= vaga.workHours %>"
+  <% } %>
+}
+</script>
+<% } %>
+
+
+
 </head>
 <body class="home">
   <%- include('../partials/header.ejs') %>

@@ -1,3 +1,38 @@
+<%
+  let descriptionClean = '';
+  if (vaga.jobDescription) {
+    descriptionClean = vaga.jobDescription
+      .replace(/"/g, '\\"')
+      .replace(/(<([^>]+)>)/gi, '')
+      .replace(/(\r\n|\n|\r)/gm, ' ')
+      .trim();
+  }
+%>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "<%= vaga.jobTitle %>",
+  "description": "<%= descriptionClean %>",
+  "datePosted": "<%= vaga.createdAt.toISOString() %>",
+  "validThrough": "<%= new Date(new Date(vaga.createdAt).getTime() + 30*24*60*60*1000).toISOString() %>",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "<%= vaga.companyName %>"
+  },
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "<%= vaga.location || 'Espírito Santo' %>",
+      "addressRegion": "ES",
+      "addressCountry": "BR"
+    }
+  }
+}
+</script>
+
 <main class="vaga-detalhes-wrapper">
     <section class="vaga-detalhes-card">
       <h1 class="vaga-titulo"><%= vaga.jobTitle %></h1>

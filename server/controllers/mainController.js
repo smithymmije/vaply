@@ -196,3 +196,5 @@ exports.vagaDetalhes = async (req, res) => {
         });
     }
 };
+
+
