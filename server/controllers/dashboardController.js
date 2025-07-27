@@ -178,17 +178,43 @@ exports.dashboardAddJob = (req, res) => {
 
 exports.dashboardAddJobSubmit = async (req, res) => {
   try {
+    // ===> Validação inicial do usuário autenticado (MUITO IMPORTANTE!) <===
+    // Sempre verifique se o usuário está logado antes de tentar usar req.user.id
+    if (!req.user || !req.user.id) {
+      req.flash('error', 'Você precisa estar logado para publicar uma vaga.');
+      return res.redirect('/login'); // Redireciona para a página de login ou dashboard
+    }
+
+    // ===> Objeto 'newJob' com todos os campos do seu JobSchema <===
+    // Mapeie req.body.[nomeDoCampo] para cada campo do seu schema.
     const newJob = {
-      user: req.user.id,
+      user: req.user.id, // O ID do usuário logado que está criando a vaga
       jobTitle: req.body.jobTitle,
       companyName: req.body.companyName,
       location: req.body.location,
-      jobType: req.body.jobType,
-      experienceLevel: req.body.experienceLevel,
-      salary: req.body.salary,
-      jobDescription: req.body.jobDescription,
-      isActive: true
+      contractType: req.body.contractType,
+      workSchedule: req.body.workSchedule,
+      // Novos campos do seu schema:
+      workScheduleDetails: req.body.workScheduleDetails,
+      mission: req.body.mission,
+      responsibilities: req.body.responsibilities, // Campo required
+      education: req.body.education,
+      experience: req.body.experience,
+      technicalSkills: req.body.technicalSkills,
+      desiredSkills: req.body.desiredSkills,
+      differentials: req.body.differentials,
+      salaryRange: req.body.salaryRange, // CORRIGIDO: usa salaryRange, não vagaSalary ou salary aninhado
+      benefitsText: req.body.benefitsText, // O novo campo de benefícios
+      applicationEmail: req.body.applicationEmail,
+      applicationLink: req.body.applicationLink,
+      applicationSite: req.body.applicationSite,
+      submissionInstructions: req.body.submissionInstructions,
+      deadline: req.body.deadline,
+      institutionalMessage: req.body.institutionalMessage,
+      isActive: true // Como definido no seu schema, o padrão é true
     };
+    
+    
     await Job.create(newJob);
     res.redirect('/dashboard');
   } catch (err) {
@@ -214,20 +240,39 @@ exports.dashboardViewJob = async (req, res) => {
 
 exports.dashboardUpdateJob = async (req, res) => {
   try {
+    
+    const updateData = {
+      jobTitle: req.body.jobTitle,
+      companyName: req.body.companyName,
+      location: req.body.location,
+      contractType: req.body.contractType,
+      workSchedule: req.body.workSchedule,
+      workScheduleDetails: req.body.workScheduleDetails,
+      mission: req.body.mission,
+      responsibilities: req.body.responsibilities,
+      education: req.body.education,
+      experience: req.body.experience,
+      technicalSkills: req.body.technicalSkills,
+      desiredSkills: req.body.desiredSkills,
+      differentials: req.body.differentials,
+      salaryRange: req.body.salaryRange,
+      benefitsText: req.body.benefitsText,
+      applicationEmail: req.body.applicationEmail,
+      applicationLink: req.body.applicationLink,
+      applicationSite: req.body.applicationSite,
+      submissionInstructions: req.body.submissionInstructions,
+      deadline: req.body.deadline,
+      institutionalMessage: req.body.institutionalMessage,
+      isActive: true,
+      updatedAt: Date.now(),
+    };
+
     await Job.findOneAndUpdate(
       { _id: req.params.id, user: req.user.id },
-      {
-        jobTitle: req.body.jobTitle,
-        companyName: req.body.companyName,
-        location: req.body.location,
-        jobType: req.body.jobType,
-        experienceLevel: req.body.experienceLevel,
-        salary: req.body.salary,
-        jobDescription: req.body.jobDescription,
-        updatedAt: Date.now()
-      },
-      { new: true, runValidators: true }
+      updateData,
+      { new: true }
     );
+
     res.redirect('/dashboard/job/' + req.params.id);
   } catch (err) {
     console.error(err);

@@ -1,4 +1,3 @@
-// models/job.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -15,34 +14,45 @@ const JobSchema = new Schema({
   },
   companyName: {
     type: String,
-    required: true,
-    trim: true
+    trim: true,
+    default: 'Confidencial'
   },
   location: {
     type: String,
     required: true,
     trim: true
   },
-  jobType: {
+  contractType: {
     type: String,
-    enum: ['full-time', 'part-time', 'internship', 'freelance', 'contract'],
+    enum: ['CLT', 'PJ', 'Estágio', 'Temporário', 'Freelancer', 'Outros'],
     required: true
   },
-  experienceLevel: {
+  workSchedule: {
     type: String,
-    enum: ['intern', 'junior', 'mid', 'senior', 'lead', 'not-specified'],
-    default: 'not-specified'
+    enum: ['Integral', 'Meio período', 'Escala', 'Híbrido', 'Remoto', 'Outros'],
+    required: true
   },
-  salary: {
+  workScheduleDetails: String,
+  mission: String,
+  responsibilities: {
     type: String,
-    trim: true,
-    default: ''
+    required: true
   },
-  jobDescription: {
-    type: String,
-    required: true,
-    trim: true
-  },
+  education: String,
+  experience: String,
+  technicalSkills: String,
+  desiredSkills: String,
+  differentials: String,
+  salaryRange: String,
+  // --- Alteração aqui: Benefícios como uma única string ---
+  benefitsText: String, 
+  // --- Fim da alteração ---
+  applicationEmail: String,
+  applicationLink: String,
+  applicationSite: String,
+  submissionInstructions: String,
+  deadline: String,
+  institutionalMessage: String,
   isActive: {
     type: Boolean,
     default: true

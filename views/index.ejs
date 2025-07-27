@@ -1,6 +1,5 @@
 <div class="main-wrapper">
   <main>
-    <!-- Função de tempo decorrido -->
     <%
       function tempoDecorrido(data) {
         const agora = new Date();
@@ -19,48 +18,106 @@
       }
     %>
 
-    <!-- Cards de vagas -->
-    <section id="vagas-container" class="card-grid">
-      <% if (typeof vagas !== 'undefined' && vagas.length > 0) { %>
-        <% vagas.forEach(vaga => { %>
-          <div class="card-column">
-            <div class="custom-card">
-              <div class="card-content">
-                <h5><%= vaga.jobTitle %></h5>
+<section id="vagas-container" class="card-grid">
+  <% if (typeof vagas !== 'undefined' && vagas.length > 0) { %>
+    <% vagas.forEach(vaga => { %>
+      <div class="card-column">
+        <div class="custom-card">
+          <div class="card-content">
+            <h5><%= vaga.jobTitle %></h5>
+
+            <div class="card-inner">
+              <!-- Coluna esquerda -->
+              <div class="card-left">
                 <p><strong>Empresa:</strong> <%= vaga.companyName %></p>
                 <p><strong>Local:</strong> <%= vaga.location %></p>
-                <p><strong>Tipo:</strong> <%= vaga.jobType %></p>
-                <p><strong>Experiência:</strong> <%= vaga.experienceLevel %></p>
-                
-                <% if (vaga.salary && vaga.salary.length > 0) { %>
-                  <p><strong>Salário:</strong> <%= vaga.salary %></p>
+                <p><strong>Tipo de Contrato:</strong> <%= vaga.contractType %></p>
+                <p><strong>Jornada:</strong> <%= vaga.workSchedule %>
+                  <% if (vaga.workScheduleDetails) { %> (<%= vaga.workScheduleDetails %>) <% } %>
+                </p>
+                <% if (vaga.salaryRange && vaga.salaryRange.length > 0) { %>
+                  <p><strong>Faixa Salarial:</strong> <%= vaga.salaryRange %></p>
+                <% } %>
+                <% if (vaga.mission) { %>
+                  <p><strong>Missão:</strong> <%= vaga.mission %></p>
+                <% } %>
+                <% if (vaga.responsibilities) { %>
+                  <p><strong>Atribuições:</strong> <%= vaga.responsibilities %></p>
+                <% } %>
+                <% if (vaga.institutionalMessage) { %>
+                  <p class="institutional-message"><em>📢 <%= vaga.institutionalMessage %></em></p>
+                <% } %>
+              </div>
+
+              <!-- Coluna direita -->
+              <div class="card-right">
+                <% if (vaga.education || vaga.experience || vaga.technicalSkills) { %>
+                  <p><strong>Requisitos Obrigatórios:</strong> 
+                    <% if (vaga.education) { %> Formação: <%= vaga.education %> <% } %>
+                    <% if (vaga.education && (vaga.experience || vaga.technicalSkills)) { %>, <% } %>
+                    <% if (vaga.experience) { %> Experiência: <%= vaga.experience %> <% } %>
+                    <% if (vaga.technicalSkills && (vaga.education || vaga.experience)) { %>, <% } %>
+                    <% if (vaga.technicalSkills) { %> Conhecimentos Técnicos: <%= vaga.technicalSkills %> <% } %>
+                  </p>
                 <% } %>
 
-                <p class="description"><%= vaga.jobDescription %></p>
+                <% if (vaga.desiredSkills) { %>
+                  <p><strong>Desejáveis:</strong> <%= vaga.desiredSkills %></p>
+                <% } %>
 
-                <div class="user-info">
-                  <img 
-                    src="<%= vaga.user?.profileImage || '/images/default-user.png' %>" 
-                    alt="Foto de <%= vaga.user?.firstName || 'Usuário' %>" 
-                    class="user-photo"
-                  >
-                  <span>✍️ Postado por <%= vaga.user?.firstName || 'Anônimo' %></span>
+                <% if (vaga.differentials) { %>
+                  <p><strong>Diferenciais:</strong> <%= vaga.differentials %></p>
+                <% } %>
+
+                <% if (vaga.benefitsText) { %>
+                  <p><strong>Benefícios:</strong> <%= vaga.benefitsText %></p>
+                <% } %>
+
+                <!-- Candidatura -->
+                <div class="application-info">
+                  <% if (vaga.deadline) { %>
+                    <p><strong>Prazo:</strong> <%= vaga.deadline %></p>
+                  <% } %>
+                  <% if (vaga.applicationEmail) { %>
+                    <p><strong>E-mail:</strong> <a href="mailto:<%= vaga.applicationEmail %>" class="app-link"><%= vaga.applicationEmail %></a></p>
+                  <% } %>
+                  <% if (vaga.applicationLink) { %>
+                    <p><strong>Link:</strong> <a href="<%= vaga.applicationLink %>" target="_blank" class="app-link">Acessar Link</a></p>
+                  <% } %>
+                  <% if (vaga.applicationSite) { %>
+                    <p><strong>Site:</strong> <a href="<%= vaga.applicationSite %>" target="_blank" class="app-link">Acessar Site</a></p>
+                  <% } %>
+                  <% if (vaga.submissionInstructions) { %>
+                    <p><strong>Instruções:</strong> <%= vaga.submissionInstructions %></p>
+                  <% } %>
                 </div>
-
-                <p class="meta">🕒 Publicado a <%= tempoDecorrido(vaga.createdAt) %></p>
               </div>
             </div>
-          </div>
-        <% }) %>
-      <% } else { %>
-        <div class="no-vagas">
-          <h4>Nenhuma vaga disponível ainda.</h4>
-          <p>Assim que algum usuário publicar uma oportunidade, aparecerá aqui!</p>
-        </div>
-      <% } %>
-    </section>
 
-    <!-- Loading spinner -->
+            <!-- Usuário -->
+            <div class="user-info">
+              <img 
+                src="<%= vaga.user?.profileImage || '/images/default-user.png' %>" 
+                alt="Foto de <%= vaga.user?.firstName || 'Usuário' %>" 
+                class="user-photo"
+              >
+              <span>✍️ Postado por <%= vaga.user?.firstName || 'Anônimo' %></span>
+            </div>
+
+            <p class="meta">🕒 Publicado a <%= tempoDecorrido(vaga.createdAt) %></p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="no-vagas">
+      <h4>Nenhuma vaga disponível ainda.</h4>
+      <p>Assim que algum usuário publicar uma oportunidade, aparecerá aqui!</p>
+    </div>
+  <% } %>
+</section>
+
+
     <div id="loading" class="loading-spinner" style="display: none;">
       <span class="spinner"></span>
     </div>

@@ -1,4 +1,3 @@
-<!-- views/dashboard/add.ejs  (agora é formulário de VAGA) -->
 <div class="add-note-wrapper">
   <nav class="breadcrumb-nav">
     <ul class="breadcrumb-list">
@@ -11,55 +10,118 @@
     <h1>Publicar Nova Vaga</h1>
   </div>
 
-  <!-- action aponta para a rota de vagas -->
   <form action="/dashboard/add-job" method="POST" class="job-form">
+
     <div class="form-group">
       <label for="jobTitle">Título da Vaga</label>
-      <input type="text" id="jobTitle" name="jobTitle" class="form-input" placeholder="Ex: Desenvolvedor Front-end Sênior" required>
+      <input type="text" id="jobTitle" name="jobTitle" class="form-input" required placeholder="Ex: Analista Fiscal Júnior">
     </div>
 
     <div class="form-group">
-      <label for="companyName">Empresa</label>
-      <input type="text" id="companyName" name="companyName" class="form-input" placeholder="Ex: Tech Solutions Ltda." required>
+      <label for="location">Local de trabalho</label>
+      <input type="text" id="location" name="location" class="form-input" required placeholder="Ex: Vila Velha – ES">
     </div>
 
     <div class="form-group">
-      <label for="location">Localização</label>
-      <input type="text" id="location" name="location" class="form-input" placeholder="Ex: São Paulo, SP ou Remoto" required>
+      <label for="companyName">Nome da Empresa (opcional)</label>
+      <input type="text" id="companyName" name="companyName" class="form-input" placeholder="Ex: Confidencial">
     </div>
 
+    <!-- CORRIGIDO -->
     <div class="form-group">
-      <label for="jobType">Tipo de Vaga</label>
-      <select id="jobType" name="jobType" class="form-input" required>
-        <option value="">Selecione o tipo de vaga</option>
-        <option value="full-time">Tempo Integral</option>
-        <option value="part-time">Meio Período</option>
-        <option value="internship">Estágio</option>
-        <option value="freelance">Freelancer</option>
-        <option value="contract">Contrato</option>
+      <label for="contractType">Tipo de Contrato</label>
+      <select id="contractType" name="contractType" class="form-input" required>
+        <option value="">Selecione uma opção</option>
+        <option value="CLT">CLT</option>
+        <option value="PJ">PJ</option>
+        <option value="Estágio">Estágio</option>
+        <option value="Temporário">Temporário</option>
+        <option value="Freelancer">Freelancer</option>
+        <option value="Outros">Outros</option>
       </select>
     </div>
 
+    <!-- CORRIGIDO -->
     <div class="form-group">
-      <label for="experienceLevel">Nível de Experiência</label>
-      <select id="experienceLevel" name="experienceLevel" class="form-input">
-        <option value="">Selecione o nível</option>
-        <option value="intern">Estagiário</option>
-        <option value="junior">Júnior</option>
-        <option value="mid">Pleno</option>
-        <option value="senior">Sênior</option>
-        <option value="lead">Líder</option>
+      <label for="workSchedule">Jornada de Trabalho</label>
+      <select id="workSchedule" name="workSchedule" class="form-input" required>
+        <option value="">Selecione uma opção</option>
+        <option value="Integral">Integral</option>
+        <option value="Meio período">Meio período</option>
+        <option value="Escala">Escala (especifique abaixo)</option>
+        <option value="Híbrido">Híbrido</option>
+        <option value="Remoto">Remoto</option>
+        <option value="Outros">Outros</option>
       </select>
+      <input type="text" name="workScheduleDetails" class="form-input" placeholder="Detalhes da escala ou outros formatos">
     </div>
 
     <div class="form-group">
-      <label for="salary">Salário (Opcional)</label>
-      <input type="text" id="salary" name="salary" class="form-input" placeholder="Ex: R$ 3.000 - R$ 5.000 ou A combinar">
+      <label for="mission">Missão / Objetivo do Cargo</label>
+      <textarea id="mission" name="mission" class="form-input" rows="2"></textarea>
     </div>
 
     <div class="form-group">
-      <label for="jobDescription">Descrição da Vaga</label>
-      <textarea id="jobDescription" name="jobDescription" class="form-input textarea-height" placeholder="Descreva os requisitos, responsabilidades e benefícios..." rows="12" required></textarea>
+      <label for="responsibilities">Principais Atribuições / Responsabilidades</label>
+      <textarea id="responsibilities" name="responsibilities" class="form-input" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Requisitos Obrigatórios</label>
+      <input type="text" name="education" class="form-input" placeholder="Formação">
+      <input type="text" name="experience" class="form-input" placeholder="Experiência mínima">
+      <input type="text" name="technicalSkills" class="form-input" placeholder="Conhecimentos técnicos">
+    </div>
+
+    <div class="form-group">
+      <label for="desiredSkills">Requisitos Desejáveis</label>
+      <textarea id="desiredSkills" name="desiredSkills" class="form-input" rows="2"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="differentials">Diferenciais</label>
+      <textarea id="differentials" name="differentials" class="form-input" rows="2" placeholder="Ex: idiomas, certificações, conhecimento em startups..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="salaryRange">Faixa Salarial</label>
+      <input type="text" id="salaryRange" name="salaryRange" class="form-input" placeholder="Ex: R$2.000 a R$2.500">
+    </div>
+
+    <div class="form-group">
+      <label for="benefitsText">Benefícios Oferecidos</label>
+      <textarea id="benefitsText" name="benefitsText" class="form-input" rows="4"
+        placeholder="Liste aqui todos os benefícios da vaga, como: Vale alimentação/refeição (valor), Vale transporte, Plano de saúde, Plano odontológico, Bonificações, Licença estendida, etc."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="applicationEmail">E-mail para candidatura</label>
+      <input type="email" id="applicationEmail" name="applicationEmail" class="form-input" placeholder="Ex: recrutamento@empresa.com">
+    </div>
+
+    <div class="form-group">
+      <label for="applicationLink">Link ou QR Code</label>
+      <input type="url" id="applicationLink" name="applicationLink" class="form-input">
+    </div>
+
+    <div class="form-group">
+      <label for="applicationSite">Site de candidatura</label>
+      <input type="url" id="applicationSite" name="applicationSite" class="form-input">
+    </div>
+
+    <div class="form-group">
+      <label for="submissionInstructions">Instruções para envio</label>
+      <textarea id="submissionInstructions" name="submissionInstructions" class="form-input" rows="2" placeholder="Ex: Assunto do e-mail “Vaga – Cidade – Nome”"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="deadline">Prazo para envio</label>
+      <input type="text" id="deadline" name="deadline" class="form-input" placeholder="Ex: Até 31/07/2025">
+    </div>
+
+    <div class="form-group">
+      <label for="institutionalMessage">Mensagem Institucional</label>
+      <textarea id="institutionalMessage" name="institutionalMessage" class="form-input" rows="2" placeholder="Ex: Venha crescer com a gente!"></textarea>
     </div>
 
     <button type="submit" class="btn-primary-form">Publicar Vaga</button>
