@@ -1,5 +1,3 @@
-// SEU ARQUIVO JAVASCRIPT DE FRONTEND (Ex: public/js/main.js)
-
 let paginaVagas = 2;
 let carregandoVagas = false;
 let fimDasVagas = false;
@@ -31,11 +29,6 @@ function scrollVagasHandler() {
 
     if (scrollTop + windowHeight >= bodyHeight - 200) {
         carregarMaisVagas();
-        // A linha abaixo está causando um erro, pois 'vagas' não está definido globalmente aqui.
-        // remova-a ou mova-a para dentro do .then() onde 'vagas' é um array real.
-        // vagas.forEach(vaga => {
-        //   console.log('🧾 Dados da vaga:', vaga);
-        // });
     }
 }
 
@@ -49,7 +42,7 @@ function carregarMaisVagas() {
 
     fetch(`/vagas/load?page=${paginaVagas}`)
         .then(res => res.json())
-        .then(vagas => { // 'vagas' aqui é o array retornado pelo backend
+        .then(vagas => {
             const container = document.getElementById('vagas-container');
 
             if (vagas.length === 0) {
@@ -58,7 +51,7 @@ function carregarMaisVagas() {
 
                 const fim = document.createElement('div');
                 fim.className = 'no-vagas';
-                fim.innerHTML = '<p>🛑 Você chegou ao fim das vagas publicadas.</p>';
+                fim.innerHTML = '<p>Você chegou ao fim das vagas publicadas.</p>';
                 container.appendChild(fim);
 
                 document.getElementById('loading').style.display = 'none';
@@ -70,9 +63,11 @@ function carregarMaisVagas() {
                 coluna.className = 'card-column';
 
                 const tempo = tempoDecorrido(vaga.createdAt);
-                // CORREÇÃO AQUI: Use vaga.userPhoto e vaga.userName diretamente
                 const foto = vaga.userPhoto || '/images/default-user.png';
                 const nome = vaga.userName || 'Anônimo';
+
+                // Ver mais: aponta para a rota de detalhes
+                const verMaisLink = `/vaga/${vaga._id}`;
 
                 coluna.innerHTML = `
                     <div class="custom-card">
@@ -80,21 +75,20 @@ function carregarMaisVagas() {
                             <h5>${vaga.jobTitle}</h5>
                             <p><strong>Empresa:</strong> ${vaga.companyName}</p>
                             <p><strong>Local:</strong> ${vaga.location}</p>
-                            <p><strong>Tipo:</strong> ${vaga.jobType}</p>
-                            <p><strong>Experiência:</strong> ${vaga.experienceLevel}</p>
-                            ${vaga.salary ? `<p><strong>Salário:</strong> ${vaga.salary}</p>` : ''}
-                            <p class="description">${vaga.jobDescription}</p>
+                            <p><strong>Contrato:</strong> ${vaga.contractType}</p>
+                            <p><strong>Jornada:</strong> ${vaga.workSchedule || 'Não informado'}</p>
+                            ${vaga.salaryRange ? `<p><strong>Faixa Salarial:</strong> ${vaga.salaryRange}</p>` : ''}
 
-                            <div class="user-info">
-                                <img
-                                    src="${foto}"
-                                    alt="Foto de ${nome}"
-                                    class="user-photo"
-                                >
-                                <span>✍️ Postado por ${nome}</span>
+                            <div class="card-actions">
+                                <a href="${verMaisLink}" class="btn-ver-mais">Ver mais detalhes</a>
                             </div>
 
-                            <p class="meta">🕒 Publicado ${tempo}</p>
+                            <div class="user-info">
+                                <img src="${foto}" alt="Foto de ${nome}" class="user-photo">
+                                <span> <i class="fas fa-pen"></i> Postado por ${nome}</span>
+                            </div>
+
+                            <p class="meta"><i class="fas fa-clock"></i> Publicado ${tempo}</p>
                         </div>
                     </div>
                 `;
@@ -111,9 +105,3 @@ function carregarMaisVagas() {
             document.getElementById('loading').style.display = 'none';
         });
 }
-
-// Opcional: Adicione um listener DOMContentLoaded se este JS for carregado no <head>
-// document.addEventListener('DOMContentLoaded', () => {
-//   // Seus listeners de scroll e outras inicializações aqui
-//   window.addEventListener('scroll', scrollVagasHandler);
-// });

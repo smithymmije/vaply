@@ -101,8 +101,8 @@ html {
   }
   
   .logo {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 2.8rem;
+    font-weight: 800;
     color: #212529;
     text-decoration: none;
     margin-right: auto;
@@ -126,6 +126,7 @@ html {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+   
   }
   
   .btn {
@@ -284,34 +285,35 @@ html {
     padding: 0 1rem;
   }
   
-  .custom-header {
+  /*.custom-header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 0;
     gap: 1rem;
-  }
+  }*/
   
-  .site-logo {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #212529;
-    text-decoration: none;
-  }
+  .custom-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #FDFEFF;
+    border-radius: 12px;
   
-  .search-form {
-    flex: 1;
-    min-width: 200px;
   }
-  
-  .search-form input {
+
+
+  /*.search-form input {
     width: 100%;
     padding: 0.5rem 1rem;
     border: 2px solid #343A40;
     border-radius: 4px;
     font-size: 1rem;
-  }
+  }*/
   
   .logout-group {
     text-align: right;
@@ -356,16 +358,38 @@ html {
     padding: 2rem 1rem; /* top/bottom = 2rem, left/right = 1rem */
   }
 
+  .notes-grid {
+      display: flex;
+      flex-wrap: wrap;  
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem 1rem; /* top/bottom = 2rem, left/right = 1rem */
+    
+  }
+
   .card-inner {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
   }
+
+  .card-grid h5 { font-size: 1.2rem;}
+  .card-grid p { font-size: .9rem; line-height: 0.8;}
   
-  .card-left,
-  .card-right {
-    flex: 1 1 45%;
-    min-width: 280px;
+  .btn-ver-mais {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #343A40;
+    color: #FDFEFF;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-ver-mais:hover {
+    background-color: #343A40;
   }
   
   
@@ -650,16 +674,30 @@ html {
   .dashboard-wrapper {
     max-width: 100vw;
     margin: 0 auto;
-    padding: 2rem 1rem 5rem;
+    padding: 3rem 1rem;
   }
+
   
-  .dashboard-header {
+  
+  /*.dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-  }
+  }*/
   
+  .dashboard-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: #FDFEFF;
+    border-radius: 12px;
+  
+  }
+
   .btn-add, .btn-start {
     padding: 0.5rem 1rem;
     background-color: #343A40;
@@ -672,7 +710,7 @@ html {
   .note-link, .notes-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 2rem;
   }
   
   .note-link {
@@ -1011,7 +1049,7 @@ html {
     border-radius: 5px;
     font-size: 1rem;
     color: #343A40;
-    background-color: #FFFFFF;
+    background-color: #FDFEFF;
 }
 
 .mobile-menu .mobile-search input:focus {
@@ -1076,7 +1114,7 @@ html {
   height: 30px;
   border-radius: 50%;        /* Deixa a imagem redonda */
   object-fit: cover;         /* Garante que a imagem se encaixe bem */
-  border: 2px solid #ddd;    /* Borda leve e elegante */
+  border: 1px solid #ddd;    /* Borda leve e elegante */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
   margin-right: 8px;         /* Espaço entre imagem e texto */
   vertical-align: middle;    /* Alinha com o texto ao lado */
@@ -1084,5 +1122,317 @@ html {
 .user-info {
   display: flex;
   align-items: center;
-  margin-top: 8px;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  justify-content: center; /* centraliza horizontalmente */
 }
+
+
+.user-info span { font-size: 1.2rem; font-weight: 200;}
+.user-info .user-photo { width: 1.5rem; height: 1.5rem; display: inline-block;}
+.user-info span i { font-size: 1rem;}
+
+
+/*Abrir Card Mais Detalhes*/
+.vaga-detalhes-wrapper {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: #FDFEFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.vaga-detalhes-card h1.vaga-titulo {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.vaga-info-basica p,
+.vaga-candidatura p,
+.vaga-detalhes-card p {
+  margin: 0.5rem 0;
+}
+
+.vaga-postada-por {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.user-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+.meta {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center; /* centraliza o texto */
+}
+
+.meta i { font-size: .8rem;}
+.btn-voltar {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #343A40;
+  color: #FDFEFF;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #343A40;
+}
+
+
+/* Aviso de Cookies */
+#cookieBanner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10050;
+  background-color: #fff;
+  color: #333;
+  font-family: system-ui, sans-serif;
+  font-size: 12px; /* Mantido como no original */
+  line-height: 1.45;
+  padding: 16px 24px;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  max-width: 100%;
+}
+
+/* Texto em destaque */
+#cookieBanner strong {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Links */
+#cookieBanner a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+#cookieBanner a:hover {
+  text-decoration: none;
+}
+
+/* Texto do aviso */
+.cookie-text {
+  flex-grow: 1;
+  margin-right: 0;
+  margin-bottom: 12px;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* Botões */
+.cookie-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.cookie-buttons button {
+  all: unset;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 2px;
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Estilos dos botões */
+.btn-accept {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+}
+
+.btn-customize {
+  background-color: #fff !important;
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}
+
+/* Telas médias: a partir de 600px */
+@media (min-width: 600px) {
+  #cookieBanner {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  .cookie-text {
+    margin-right: 24px;
+    margin-bottom: 0;
+    text-align: left;
+    max-width: 70%;
+  }
+
+  .cookie-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: auto;
+  }
+
+  .cookie-buttons button {
+    width: auto;
+    min-width: 120px;
+  }
+}
+
+/* Telas grandes (>= 1024px) — sem mudar aparência, só refina proporções */
+@media (min-width: 1024px) {
+  .cookie-text {
+    max-width: 75%;
+  }
+}
+
+/* Telas 4K (>= 1920px) — apenas centraliza */
+@media (min-width: 1920px) {
+  #cookieBanner {
+    margin: 0 auto;
+    max-width: 1400px;
+  }
+
+  .cookie-text {
+    max-width: 80%;
+  }
+}
+
+
+#cookieOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* tom escuro com transparência */
+  z-index: 10049; /* abaixo do banner (1050) */
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+
+/*PRECISA CONSERTAR*/
+/* Google Analytics - estilos para modal de cookies */
+#cookieModal input[type="checkbox"] {
+  cursor: pointer;
+  pointer-events: auto;  /* garante que o clique funcione */
+}
+
+#cookieModal label {
+  cursor: pointer;
+  user-select: none; /* evita seleção de texto ao clicar */
+  color: #000; /* texto preto */
+}
+
+/* Estilos do overlay/modal */
+#cookieModal {
+  display: none; /* alterar para block quando o modal abrir */
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8); /* fundo preto translúcido */
+  z-index: 10051;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Conteúdo do modal */
+#cookieModal .cookieModalContent {
+  background: #fff; /* fundo branco */
+  color: #000; /* texto preto */
+  padding: 20px;
+  max-width: 500px;
+  margin: 50px auto;
+  border-radius: 8px;
+  position: relative;
+  z-index: 10052;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* Estilo checkbox preto e branco */
+input[type="checkbox"] {
+  all: unset; /* remove estilos padrões */
+  width: 10px;
+  height: 10px;
+  border: 1px solid #000; /* borda preta */
+  border-radius: 4px;
+  background-color: #fff; /* fundo branco */
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #000; /* fundo preto quando marcado */
+  border-color: #000; /* borda preta */
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: #fff; /* símbolo branco */
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+/* Botões estilo preto e branco */
+#cookieModal button {
+  background-color: #000 !important; /* preto */
+  color: #fff !important; /* branco */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+#cookieModal button#cancelCookieModal {
+  background-color: #000; /* cinza escuro */
+  margin-left: 10px;
+}
+
+#cookieModal button:hover {
+  background-color: #222; /* preto mais claro no hover */
+}
+
+#cookieModal button#cancelCookieModal:hover {
+  background-color: #333; /* cinza médio no hover */
+}
+

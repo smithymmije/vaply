@@ -148,3 +148,51 @@ exports.about = async (req, res) => {
         layout: '../views/layouts/front-page'
     });
 };
+
+
+/**
+ * GET /vaga/:id
+ * Página com todos os detalhes da vaga
+ */
+exports.vagaDetalhes = async (req, res) => {
+    const locals = {
+        title: "Detalhes da Vaga",
+        description: "Informações completas sobre a oportunidade.",
+    };
+
+    try {
+        const vaga = await Job.findById(req.params.id)
+            .populate('user', 'firstName profileImage')
+            .lean();
+
+        if (!vaga) {
+            return res.status(404).render('404', {
+                locals: { title: "Vaga não encontrada" },
+                layout: '../views/layouts/front-page',
+                userName: req.user?.firstName || null,
+                userPhoto: req.user?.profileImage || null
+            });
+        }
+
+        // Adiciona os campos formatados para a view
+        vaga.userName = vaga.user?.firstName || 'Anônimo';
+        vaga.userPhoto = vaga.user?.profileImage || '/images/default-user.png';
+
+        res.render('vaga-detalhes', {
+            locals,
+            layout: '../views/layouts/front-page',
+            vaga,
+            tempoDecorrido,
+            userName: req.user?.firstName || null,      // ✅ Incluído para o header funcionar
+            userPhoto: req.user?.profileImage || null   // ✅ Incluído para o header funcionar
+        });
+    } catch (error) {
+        console.error("Erro ao carregar detalhes da vaga:", error);
+        res.status(500).render('500', {
+            locals: { title: "Erro interno" },
+            layout: '../views/layouts/front-page',
+            userName: req.user?.firstName || null,
+            userPhoto: req.user?.profileImage || null
+        });
+    }
+};

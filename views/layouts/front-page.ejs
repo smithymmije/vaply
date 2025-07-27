@@ -25,7 +25,48 @@
   <%- body %>
   <%- include('../partials/footer.ejs') %>
 
-  <!-- Script personalizado -->
   <script src="/js/scrollNotas.js"></script>
+<script src="/js/cookies.js"></script>
+
+<div id="cookieOverlay"></div>
+
+<div id="cookieBanner" role="alert">
+  <div class="cookie-text">
+    <strong>Este site utiliza cookies</strong>
+    Usamos tecnologias como cookies para melhorar sua experiência, personalizar conteúdo e anúncios, e analisar nosso tráfego. Compartilhamos informações com nossos parceiros de publicidade e análise.
+    Você pode aceitar todos os cookies ou escolher quais permitir.
+    Para saber mais, veja nosso <a href="privacidade.html">Aviso de Privacidade</a>.
+  </div>
+  <div class="cookie-buttons">
+    <button class="btn-customize" id="btnPersonalizarCookies">Personalizar</button>
+    <button class="btn-accept" id="btnAceitarTudo">Aceitar Tudo</button>
+  </div>
+</div>
+
+<div id="cookieModal" style="display:none;">
+  <div class="cookieModalContent">
+    <h2>Preferências de Cookies</h2>
+    <form id="cookieForm">
+      <label>
+        <input type="checkbox" name="necessary" checked disabled>
+        Cookies necessários (obrigatórios)
+      </label><br><br>
+
+      <label>
+        <input type="checkbox" name="analytics" id="analytics">
+        Cookies de análise (Google Analytics)
+      </label><br><br>
+
+      <label>
+        <input type="checkbox" name="marketing" id="marketing">
+        Cookies de marketing (Facebook Pixel)
+      </label><br><br>
+
+      <button type="submit" id="btnSalvarPreferencias">Salvar preferências</button>
+      <button type="button" id="btnCancelarModal">Cancelar</button>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>

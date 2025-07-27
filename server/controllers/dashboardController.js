@@ -3,7 +3,7 @@ const Note = require('../models/Notes');
 const Job  = require('../models/job');
 const mongoose = require('mongoose');
 
-const perPage = 10;
+const perPage = 9;
 
 /* =========================================================
    DASHBOARD  –  LISTA TANTO NOTAS QUANTO VAGAS

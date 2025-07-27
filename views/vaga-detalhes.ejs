@@ -1,0 +1,83 @@
+<main class="vaga-detalhes-wrapper">
+    <section class="vaga-detalhes-card">
+      <h1 class="vaga-titulo"><%= vaga.jobTitle %></h1>
+  
+      <div class="vaga-info-basica">
+        <p><strong>Empresa:</strong> <%= vaga.companyName %></p>
+        <p><strong>Local:</strong> <%= vaga.location %></p>
+        <p><strong>Contrato:</strong> <%= vaga.contractType %></p>
+        <p><strong>Jornada:</strong> <%= vaga.workSchedule %>
+          <% if (vaga.workScheduleDetails) { %> (<%= vaga.workScheduleDetails %>) <% } %>
+        </p>
+        <% if (vaga.salaryRange) { %>
+          <p><strong>Faixa Salarial:</strong> <%= vaga.salaryRange %></p>
+        <% } %>
+      </div>
+  
+      <% if (vaga.mission) { %>
+        <p><strong>Missão da vaga:</strong> <%= vaga.mission %></p>
+      <% } %>
+  
+      <% if (vaga.responsibilities) { %>
+        <p><strong>Atribuições:</strong> <%= vaga.responsibilities %></p>
+      <% } %>
+  
+      <% if (vaga.education || vaga.experience || vaga.technicalSkills) { %>
+        <p><strong>Requisitos:</strong>
+          <% if (vaga.education) { %> Formação: <%= vaga.education %> <% } %>
+          <% if (vaga.experience) { %> | Experiência: <%= vaga.experience %> <% } %>
+          <% if (vaga.technicalSkills) { %> | Conhecimentos: <%= vaga.technicalSkills %> <% } %>
+        </p>
+      <% } %>
+  
+      <% if (vaga.desiredSkills) { %>
+        <p><strong>Desejáveis:</strong> <%= vaga.desiredSkills %></p>
+      <% } %>
+  
+      <% if (vaga.differentials) { %>
+        <p><strong>Diferenciais:</strong> <%= vaga.differentials %></p>
+      <% } %>
+  
+      <% if (vaga.benefitsText) { %>
+        <p><strong>Benefícios:</strong> <%= vaga.benefitsText %></p>
+      <% } %>
+  
+      <% if (vaga.institutionalMessage) { %>
+        <p class="institutional-message"><em>📢 <%= vaga.institutionalMessage %></em></p>
+      <% } %>
+  
+      <div class="vaga-candidatura">
+        <h3>Como se candidatar:</h3>
+        <% if (vaga.deadline) { %>
+          <p><strong>Prazo:</strong> <%= vaga.deadline %></p>
+        <% } %>
+        <% if (vaga.applicationEmail) { %>
+          <p><strong>E-mail:</strong> <a href="mailto:<%= vaga.applicationEmail %>"><%= vaga.applicationEmail %></a></p>
+        <% } %>
+        <% if (vaga.applicationLink) { %>
+          <p><strong>Link:</strong> <a href="<%= vaga.applicationLink %>" target="_blank">Acessar Link</a></p>
+        <% } %>
+        <% if (vaga.applicationSite) { %>
+          <p><strong>Site:</strong> <a href="<%= vaga.applicationSite %>" target="_blank">Acessar Site</a></p>
+        <% } %>
+        <% if (vaga.submissionInstructions) { %>
+          <p><strong>Instruções:</strong> <%= vaga.submissionInstructions %></p>
+        <% } %>
+      </div>
+  
+      <div class="vaga-postada-por">
+        <img 
+          src="<%= vaga.userPhoto %>" 
+          alt="Foto de <%= vaga.userName %>" 
+          class="user-photo"
+        >
+        <p><i class="fas fa-pen"></i> Postado por <%= vaga.userName %></p>
+        <p class="meta"><i class="fas fa-clock"></i> Publicado <%= tempoDecorrido(vaga.createdAt) %></p>
+      </div>
+  
+      <div class="navegacao-voltar">
+        <a href="/" class="btn-voltar">⬅ Voltar para vagas</a>
+      </div>
+    </section>
+  </main>
+  
