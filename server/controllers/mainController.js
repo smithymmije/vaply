@@ -115,18 +115,22 @@ exports.carregarMaisVagas = async (req, res) => {
 
         // Mapeia os dados para o formato que o frontend espera, incluindo info do usuário
         res.json(vagas.map(vaga => ({
-            _id: vaga._id, // Importante para o frontend rastrear cards
+            _id: vaga._id,
             jobTitle: vaga.jobTitle,
             companyName: vaga.companyName,
             location: vaga.location,
+            contractType: vaga.contractType,        // ✅ ADICIONADO
+            workSchedule: vaga.workSchedule,        // ✅ ADICIONADO
+            salaryRange: vaga.salaryRange,          // ✅ ADICIONADO
             jobType: vaga.jobType,
             experienceLevel: vaga.experienceLevel,
             salary: vaga.salary,
             jobDescription: vaga.jobDescription,
-            createdAt: vaga.createdAt, // Necessário para a função timeAgo no frontend
+            createdAt: vaga.createdAt,
             userName: vaga.user?.firstName || 'Anônimo',
             userPhoto: vaga.user?.profileImage || '/images/default-user.png'
         })));
+        
     } catch (error) {
         console.error("Erro ao carregar vagas via scroll:", error);
         res.status(500).json({ error: 'Erro ao carregar mais vagas.' });

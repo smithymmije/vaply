@@ -76,8 +76,8 @@ function carregarMaisVagas() {
                             <p><strong>Empresa:</strong> ${vaga.companyName}</p>
                             <p><strong>Local:</strong> ${vaga.location}</p>
                             <p><strong>Contrato:</strong> ${vaga.contractType}</p>
-                            <p><strong>Jornada:</strong> ${vaga.workSchedule || 'Não informado'}</p>
-                            ${vaga.salaryRange ? `<p><strong>Faixa Salarial:</strong> ${vaga.salaryRange}</p>` : ''}
+                            <p><strong>Jornada:</strong> ${vaga.workSchedule}</p>
+                            <p><strong>Faixa Salarial:</strong> ${vaga.salaryRange}</p>
 
                             <div class="card-actions">
                                 <a href="${verMaisLink}" class="btn-ver-mais">Ver mais detalhes</a>
