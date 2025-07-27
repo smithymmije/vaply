@@ -105,3 +105,4 @@ function carregarMaisVagas() {
             document.getElementById('loading').style.display = 'none';
         });
 }
+
