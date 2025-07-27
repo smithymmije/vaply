@@ -139,5 +139,48 @@
   </div>
 </div>
 
+<script>
+  function isInWebView() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return (
+      userAgent.includes("FBAN") || // Facebook
+      userAgent.includes("FBAV") ||
+      userAgent.includes("Instagram") ||
+      userAgent.includes("LinkedIn") ||
+      (userAgent.includes("wv") && /Android/i.test(userAgent)) // Android WebView
+    );
+  }
+
+  if (isInWebView()) {
+    const loginBtn = document.getElementById("google-login-btn");
+    if (loginBtn) loginBtn.style.display = "none";
+
+    const warning = document.createElement("div");
+    warning.style.background = "#ffe9e9";
+    warning.style.color = "#b30000";
+    warning.style.padding = "1rem";
+    warning.style.border = "1px solid #ff0000";
+    warning.style.borderRadius = "8px";
+    warning.style.margin = "2rem";
+    warning.style.textAlign = "center";
+
+    warning.innerHTML = `
+      ⚠️ O login com Google não funciona neste ambiente.<br>
+      <strong>Toque no botão abaixo para abrir no navegador:</strong><br><br>
+      <a href="${window.location.href}" style="
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #b30000;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+      ">Abrir no navegador</a>
+    `;
+    document.body.prepend(warning);
+  }
+</script>
+
+
 </body>
 </html>
